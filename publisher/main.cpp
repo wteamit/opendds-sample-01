@@ -17,13 +17,6 @@ int main(int argc, char* argv[]) {
   Publisher publisher(argc, argv);
   MessageCreator messageCreator;
 
-  bool connectionStatus = publisher.connectToDDS();
-
-  if (false == connectionStatus) {
-    cerr << "Cannot connect to dds. Quitting..." << endl;
-    return 1;
-  }
-
   while (true) {
     sleep_for(sleepTime);
     const auto& message = messageCreator.getRandomMessage();

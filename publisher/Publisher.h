@@ -11,7 +11,6 @@ public:
   Publisher(int argc, char* argv[]);
   ~Publisher();
 
-  bool connectToDDS();
   void sendMessage(const std::string& message);
 
 private:

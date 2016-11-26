@@ -43,10 +43,6 @@ Publisher::~Publisher() {
   TheServiceParticipant->shutdown();
 }
 
-bool Publisher::connectToDDS() {
-  return true;
-}
-
 void Publisher::sendMessage(const std::string& message) {
   TopicSample::Message topic;
   topic.counter = m_counter++;
