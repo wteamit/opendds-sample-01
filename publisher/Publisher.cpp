@@ -98,12 +98,12 @@ void Publisher::registerTopic() {
   ) {
     cerr << "register_type for " << MessageType << " failed." << endl;
   }
-  DDS::TopicQos default_topic_qos;
-  m_participant->get_default_topic_qos(default_topic_qos);
+  DDS::TopicQos defaultQoS;
+  m_participant->get_default_topic_qos(defaultQoS);
   m_messageTopic = m_participant->create_topic (
     MessageTopic,
     MessageType,
-    default_topic_qos,
+    defaultQoS,
     DDS::TopicListener::_nil(),
     ::OpenDDS::DCPS::DEFAULT_STATUS_MASK);
   if (CORBA::is_nil (m_messageTopic.in ())) {
@@ -112,19 +112,19 @@ void Publisher::registerTopic() {
 }
 
 void Publisher::createDataWriter() {
-  DDS::DataWriterQos dw_default_qos;
-  m_publisher->get_default_datawriter_qos (dw_default_qos);
-  DDS::DataWriter_var quote_base_dw =
+  DDS::DataWriterQos defaultQoS;
+  m_publisher->get_default_datawriter_qos (defaultQoS);
+  DDS::DataWriter_var dataWriter =
   m_publisher->create_datawriter(
     m_messageTopic.in (),
-    dw_default_qos,
+    defaultQoS,
     DDS::DataWriterListener::_nil(),
     ::OpenDDS::DCPS::DEFAULT_STATUS_MASK
   );
-  if (CORBA::is_nil (quote_base_dw.in ())) {
+  if (CORBA::is_nil (dataWriter.in ())) {
     cerr << "create_datawriter for " << MessageTopic << " failed." << endl;
   }
-  m_dataWriter = TopicSample::MessageDataWriter::_narrow(quote_base_dw.in());
+  m_dataWriter = TopicSample::MessageDataWriter::_narrow(dataWriter.in());
   if (CORBA::is_nil (m_dataWriter.in ())) {
     cerr << "MessageDataWriter could not be narrowed"<< endl;
   }
