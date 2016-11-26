@@ -85,19 +85,19 @@ void Subscriber::registerTopic() {
       m_participant.in(),
       MessageType)
     ) {
-      cerr << "register_type for " << MessageType << " failed." << endl;
+      cerr << "Cration of register_type for " << MessageType << " failed." << endl;
     }
-    DDS::TopicQos default_topic_qos;
-    m_participant->get_default_topic_qos(default_topic_qos);
+    DDS::TopicQos defaultQoS;
+    m_participant->get_default_topic_qos(defaultQoS);
     m_messageTopic = m_participant->create_topic (
       MessageTopic,
       MessageType,
-      default_topic_qos,
+      defaultQoS,
       DDS::TopicListener::_nil(),
       ::OpenDDS::DCPS::DEFAULT_STATUS_MASK
     );
     if (CORBA::is_nil (m_messageTopic.in ())) {
-      cerr << "create_topic for " << MessageTopic << " failed." << endl;
+      cerr << "Creation of create_topic for " << MessageTopic << " failed." << endl;
     }
 }
 
@@ -108,12 +108,12 @@ void Subscriber::createDataReader() {
   if (CORBA::is_nil (m_listener.in ())) {
     cerr << "ExchangeEvent listener is nil." << endl;
   }
-  DDS::DataReaderQos dr_default_qos;
-  m_subscriber->get_default_datareader_qos (dr_default_qos);
+  DDS::DataReaderQos defaultQoS;
+  m_subscriber->get_default_datareader_qos (defaultQoS);
 
   DDS::DataReader_var quote_dr = m_subscriber->create_datareader(
     m_messageTopic.in (),
-    dr_default_qos,
+    defaultQoS,
     m_listener.in (),
     ::OpenDDS::DCPS::DEFAULT_STATUS_MASK
   );
