@@ -1,0 +1,10 @@
+module TopicSample {
+
+#pragma DCPS_DATA_TYPE "TopicSample::Message"
+
+struct Message {
+  string m;
+  long counter;
+};
+
+};
