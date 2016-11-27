@@ -32,60 +32,38 @@ After the cmake generation, build the project with:
 
 ### Start DCPSInfoRepo ###
 
+Open a console, go to the DDS_ROOT/bin folder, and then
 
+```
+> ..\setenv.cmd
+> .\DCPSInfoRepo -ORBEndpoint iiop://localhost:12345 -d domain_ids
+```
 
-// *******************************************************************
-//
-// (c) Copyright 2006, Object Computing, Inc.
-// All Rights Reserved.
-//
-// *******************************************************************
+This will start the server.
 
-Instructions for Building the Example (assuming ACE, TAO, DDS, and MPC
-are installed and configured):
+### Start publisher ###
 
-1) Run Make Project Creator to generate build files:
+Open another console, go to the bin/ folder where you've built the project and then:
 
-Windows, VC 7.1:   perl %ACE_ROOT%\bin\mwc.pl -type vc71 StockQuoter.mwc
-Unix, GNU Make:    $ACE_ROOT/bin/mwc.pl -type gnuace StockQuoter.mwc
+```
+> .\publisher -DCPSConfigFile configuration.ini
+```
 
-2)  Build the application
+This will start the publisher. After some second you should be able to see messages
+that are published in DDS.
 
+### Start subscriber ###
 
-Instructions for running the example:
+Open Another console, go to the bin/ folder where you've built the project and then:
 
-For TCP pub/sub:
+```
+> .\subscriber -DCPSConfigFile configuration.ini
+```
 
-1)  Run the DCPSInfo server
+After some second the subscriber will be connected and messages received from the
+publisher should be printed.
 
-       $DDS_ROOT/dds/InfoRepo/DCPSInfoRepo -ORBEndpoint iiop://localhost:12345 -d domain_ids
+## Linux users
 
-2)  Run the Subscriber
-
-       ./subscriber -DCPSConfigFile dds_tcp_conf.ini
-
-
-3)  Run the Publisher
-
-       ./publisher -DCPSConfigFile dds_tcp_conf.ini
-
-
-For UDP pub/sub:
-
-1)  Run the DCPSInfo server
-
-       $DDS_ROOT/dds/InfoRepo/DCPSInfoRepo -ORBEndpoint iiop://localhost:12345 -d domain_ids
-
-2)  Run the Subscriber
-
-       ./subscriber -DCPSConfigFile dds_udp_conf.ini
-
-
-3)  Run the Publisher
-
-       ./publisher -DCPSConfigFile dds_udp_conf.ini
-
-
-
--Don Busch
- busch_d@ociweb.com
+For linux users commands are the same, except that `setenv.cmd` becomes `setenv.sh`,
+obviously.
