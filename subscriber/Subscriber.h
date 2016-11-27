@@ -3,12 +3,14 @@
 
 #include "idl/TopicsTypeSupportImpl.h"
 #include <dds/DCPS/Service_Participant.h>
+#include <functional>
 
 class Subscriber {
 public:
 
   Subscriber(int argc, char* argv[]);
   ~Subscriber();
+  void setReceivedTopicFunction(std::function<void (const TopicSample::Message&)> tf);
 
 private:
 

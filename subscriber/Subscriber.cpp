@@ -44,6 +44,11 @@ Subscriber::~Subscriber() {
   TheServiceParticipant->shutdown();
 }
 
+void Subscriber::setReceivedTopicFunction(std::function<void (const TopicSample::Message&)> tf) {
+  auto listenerServant = dynamic_cast<MessageDataReaderListenerImpl*>(m_listener.in());
+  listenerServant->setReceivedTopicFunction(tf);
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // PRIVATE SECTION                                                           //
 ///////////////////////////////////////////////////////////////////////////////

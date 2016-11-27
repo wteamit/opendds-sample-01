@@ -9,6 +9,7 @@
 using std::cerr;
 using std::cout;
 using std::endl;
+using std::string;
 
 ///////////////////////////////////////////////////////////////////////////////
 // CONSTANTS SECTION                                                         //
@@ -43,7 +44,7 @@ Publisher::~Publisher() {
   TheServiceParticipant->shutdown();
 }
 
-void Publisher::sendMessage(const std::string& message) {
+void Publisher::sendMessage(const string& message) {
   TopicSample::Message topic;
   topic.counter = m_counter++;
   topic.m = message.c_str();

@@ -10,7 +10,7 @@ include_directories (${DDS_ROOT_DIR} "${DDS_ROOT_DIR}/ACE_wrappers" "${DDS_ROOT_
 
 file (GLOB_RECURSE PUBLISHER_SRC *.cpp)
 file (GLOB_RECURSE IDL_SRC ${CMAKE_SOURCE_DIR}/idl/*.cpp)
-
+configure_file("${CMAKE_SOURCE_DIR}/configuration/configuration.ini" "${CMAKE_CURRENT_BINARY_DIR}/configuration.ini" COPYONLY)
 add_executable (${PROJECT_NAME} ${PUBLISHER_SRC} ${IDL_SRC})
 
 # Adding DDS link_libraries
